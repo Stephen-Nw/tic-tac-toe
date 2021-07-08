@@ -26,9 +26,9 @@ def play_game():
     structure = "    |     |    \n  1 |  2  |  3 \n----|-----|----\n  4 |  5  |  6 \n    |     |    \n" \
                 "----|-----|----\n  7 |  8  |  9 \n    |     |    "
 
-    a = create_players()
-    player1 = a[0]
-    player2 = a[1]
+    players = create_players()
+    player1 = players[0]
+    player2 = players[1]
 
     print(f"Player 1: {player1}")
     print(f"Player 2: {player2}")
