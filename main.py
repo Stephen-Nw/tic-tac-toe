@@ -49,15 +49,3 @@ def play_game():
 
 play_game()
 
-# def p_word():
-#     looping = True
-#     password = ""
-#
-#     while looping:
-#
-#         ans1 = input("\n\nTest a new password? ")
-#
-#         if ans1.upper() in ("NO", "N"):
-#             looping = False
-#
-# p_word()
