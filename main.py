@@ -6,18 +6,27 @@
 # a = board()
 # print(a)
 
+
 def create_players():
     """Create two players for game"""
-    player1 = input("Player 1,Do you want to be 'X' or 'O'?\n").upper()
+    player_selection = True
+    player1 = ""
     player2 = ""
-    if player1 == "X":
-        print("That means Player 2 is 'O")
-        player2 = 'O'
-    elif player1 == "O":
-        print("That means Player 2 is 'X")
-        player2 = 'X'
-    else:
-        print("Choice is invalid")
+    while player_selection:
+        first_player_choice = input("Player 1,Do you want to be 'X' or 'O'?\n").upper()
+        if first_player_choice == "X":
+            print("That means Player 2 is O")
+            player1 = first_player_choice
+            player2 = 'O'
+            player_selection = False
+        elif first_player_choice == "O":
+            print("That means Player 2 is X")
+            player1 = first_player_choice
+            player2 = 'X'
+            player_selection = False
+        else:
+            print("Choice is invalid, try again")
+            print("===============================")
     return player1, player2
 
 
@@ -40,12 +49,15 @@ def play_game():
 
 play_game()
 
-
-
-
-
-
-
-
-
-
+# def p_word():
+#     looping = True
+#     password = ""
+#
+#     while looping:
+#
+#         ans1 = input("\n\nTest a new password? ")
+#
+#         if ans1.upper() in ("NO", "N"):
+#             looping = False
+#
+# p_word()
