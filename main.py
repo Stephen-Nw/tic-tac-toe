@@ -55,8 +55,8 @@ def play_game():
 
     # =========================GAMEPLAY=====================================================
     all_players = [first_player, second_player]
+    occupied_spaces = []
     for player in all_players:
-        occupied_spaces = []
         player_choice = int(input(f"{player}, make a choice:\n"))
 
         if player_choice < 0 or player_choice > 9:
@@ -67,13 +67,14 @@ def play_game():
             new_board = board.replace(str(player_choice), characters[player_index])
             board = new_board
             occupied_spaces.append(player_choice)
+            print(occupied_spaces)
             print(board)
         else:
             print("That space is taken; try again")
             print(board)
     return
 
-# TODO 1: Check occupied_spaces logic; not working
+
 # TODO 2: Check player choice range logic; not working
 
 
