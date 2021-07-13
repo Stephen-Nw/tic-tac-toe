@@ -57,17 +57,28 @@ def play_game():
     all_players = [first_player, second_player]
     occupied_spaces = []
     for player in all_players:
-        player_choice = int(input(f"{player}, make a choice:\n"))
+        choose_number = True
+        valid_number = 0
 
-        if player_choice < 0 or player_choice > 9:
-            print("Please choose a number between 1 and 9")
+        # Validate player choice
+        while choose_number:
+            try:
+                player_choice = int(input(f"{player}, make a choice:\n"))
+            except ValueError:
+                print("Error!! Only numbers are allowed")
+            else:
+                if player_choice not in range(1, 10):
+                    print("Please choose a number between 1 and 9")
+                else:
+                    valid_number = player_choice
+                    choose_number = False
 
-        if player_choice not in occupied_spaces:
+        # Validate that player choice has not been used
+        if valid_number not in occupied_spaces:
             player_index = all_players.index(player)
-            new_board = board.replace(str(player_choice), characters[player_index])
+            new_board = board.replace(str(valid_number), characters[player_index])
             board = new_board
-            occupied_spaces.append(player_choice)
-            print(occupied_spaces)
+            occupied_spaces.append(valid_number)
             print(board)
         else:
             print("That space is taken; try again")
