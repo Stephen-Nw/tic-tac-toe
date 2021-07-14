@@ -57,7 +57,6 @@ def play_game():
     occupied_spaces = []
     number_turns = 0
 
-    # logic to ensure that there are only 9 tries per game (board has only 9 squares)
     while number_turns != 9:
         for player in all_players:
             choose_number = True
