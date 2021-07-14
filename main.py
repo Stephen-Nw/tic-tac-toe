@@ -7,7 +7,6 @@
 # print(a)
 
 
-
 def create_players():
     """Create two players for game"""
     player_selection = True
@@ -56,33 +55,44 @@ def play_game():
     # =========================GAMEPLAY=====================================================
     all_players = [first_player, second_player]
     occupied_spaces = []
-    for player in all_players:
-        choose_number = True
-        valid_number = 0
+    number_turns = 0
 
-        # Validate player choice
-        while choose_number:
-            try:
-                player_choice = int(input(f"{player}, make a choice:\n"))
-            except ValueError:
-                print("Error!! Only numbers are allowed")
-            else:
-                if player_choice not in range(1, 10):
-                    print("Please choose a number between 1 and 9")
+    # logic to ensure that there are only 9 tries per game (board has only 9 squares)
+    while number_turns != 9:
+        for player in all_players:
+            choose_number = True
+            valid_number = 0
+
+            # Validate player choice
+            while choose_number:
+                try:
+                    player_choice = int(input(f"{player}, make a choice:\n"))
+                except ValueError:
+                    print("Error!! Only numbers are allowed")
                 else:
-                    valid_number = player_choice
-                    choose_number = False
+                    if player_choice not in range(1, 10):
+                        print("Please choose a number between 1 and 9")
+                    else:
+                        valid_number = player_choice
+                        choose_number = False
 
-        # Validate that player choice has not been used
-        if valid_number not in occupied_spaces:
-            player_index = all_players.index(player)
-            new_board = board.replace(str(valid_number), characters[player_index])
-            board = new_board
-            occupied_spaces.append(valid_number)
-            print(board)
-        else:
-            print("That space is taken; try again")
-            print(board)
+            # Validate that player choice has not been used
+            if valid_number not in occupied_spaces:
+                player_index = all_players.index(player)
+                new_board = board.replace(str(valid_number), characters[player_index])
+                board = new_board
+                occupied_spaces.append(valid_number)
+                print(board)
+                number_turns += 1
+                if number_turns == 9:
+                    break
+                print(f"Num turns: {number_turns}")
+            else:
+                print("That space is taken; try again")
+                print(board)
+
+    print("Game over!!")
+
     return
 
 
