@@ -95,7 +95,7 @@ def play_game():
     return
 
 
-# TODO 2: Check player choice range logic; not working
+# TODO: Fix duplicate selection issue
 
 
 play_game()
