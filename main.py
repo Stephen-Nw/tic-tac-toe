@@ -30,17 +30,15 @@ def create_players():
     return player1, player2
 
 
-# def win_game(player, number):
-#     x_choices = []
-#     o_choices = []
-#     if player == "X":
-#         x_choices.append(number)
-#         print(x_choices)
-#     else:
-#         o_choices.append(number)
-#         print(o_choices)
-#
-#     return
+def win_game(player_list, player):
+    """Evaluates player choices against winning combinations"""
+    winning_combos = [[1, 2, 3], [1, 4, 7], [1, 5, 9], [2, 5, 8], [3, 6, 9], [3, 5, 7], [4, 5, 6], [7, 8, 9]]
+    sorted_player_list = sorted(player_list)
+    if len(sorted_player_list) >= 3:
+        check_combo = sorted_player_list[:3]
+        if check_combo in winning_combos:
+            print(f"{player} wins")
+    return
 
 
 
@@ -102,10 +100,12 @@ def play_game():
                 number_turns += 1
                 if characters[player_index] == "X":
                     x_choices.append(valid_number)
+                    win_game(x_choices, player)
                     print(f"X choices: {x_choices}")
                 if characters[player_index] == "O":
                     o_choices.append(valid_number)
                     print(f"O choices: {o_choices}")
+                    win_game(o_choices, player)
                 if number_turns == 9:
                     break
             else:
