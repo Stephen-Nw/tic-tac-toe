@@ -39,6 +39,8 @@ def create_players():
 #     else:
 #         o_choices.append(number)
 #         print(o_choices)
+#
+#     return
 
 
 
@@ -68,6 +70,8 @@ def play_game():
     # =========================GAMEPLAY=====================================================
     all_players = [first_player, second_player]
     occupied_spaces = []
+    x_choices = []
+    o_choices = []
     number_turns = 0
 
     while number_turns != 9:
@@ -96,6 +100,12 @@ def play_game():
                 occupied_spaces.append(valid_number)
                 print(board)
                 number_turns += 1
+                if characters[player_index] == "X":
+                    x_choices.append(valid_number)
+                    print(f"X choices: {x_choices}")
+                if characters[player_index] == "O":
+                    o_choices.append(valid_number)
+                    print(f"O choices: {o_choices}")
                 if number_turns == 9:
                     break
             else:
