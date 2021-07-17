@@ -1,12 +1,3 @@
-# def board():
-#     """Board used to play the game. Numbers correspond to the spaces"""
-#     board = "    |     |    \n  1 |  2  |  3 \n----|-----|----\n  4 |  5  |  6 \n    |     |    \n" \
-#                 "----|-----|----\n  7 |  8  |  9 \n    |     |    "
-#     return board
-# a = board()
-# print(a)
-
-
 def create_players():
     """Create two players for game"""
     player_selection = True
@@ -15,12 +6,10 @@ def create_players():
     while player_selection:
         first_player_choice = input("Player 1, Do you want to be 'X' or 'O'?\n").upper()
         if first_player_choice == "X":
-            # print("That means Player 2 is O")
             player1 = first_player_choice
             player2 = 'O'
             player_selection = False
         elif first_player_choice == "O":
-            # print("That means Player 2 is X")
             player1 = first_player_choice
             player2 = 'X'
             player_selection = False
@@ -33,14 +22,20 @@ def create_players():
 def win_game(player_list, player):
     """Evaluates player choices against winning combinations"""
     winning_combos = [[1, 2, 3], [1, 4, 7], [1, 5, 9], [2, 5, 8], [3, 6, 9], [3, 5, 7], [4, 5, 6], [7, 8, 9]]
-    sorted_player_list = sorted(player_list)
-    if len(sorted_player_list) >= 3:
-        check_combo = sorted_player_list[:3]
-        if check_combo in winning_combos:
-            print(f"{player} wins")
-    return
-
-
+    amended_player_list = player_list + [97, 98, 99, 100, 101, 102, 103]  # Hardcode list to make player list > 3
+    sorted_player_list = sorted(amended_player_list)
+    print(f"{player}: {sorted_player_list}")
+    game_continue = "Yes"
+    if sorted_player_list[:3] in winning_combos:
+        print(f"{player} wins!!")
+        game_continue = "No"
+    if sorted_player_list[1:4] in winning_combos:
+        print(f"{player} wins!!")
+        game_continue = "No"
+    if sorted_player_list[2:5] in winning_combos:
+        print(f"{player} wins!!")
+        game_continue = "No"
+    return game_continue
 
 
 def play_game():
@@ -64,15 +59,16 @@ def play_game():
 
     print(f"{first_player}: {player1}")
     print(f"{second_player}: {player2}")
-
+    
     # =========================GAMEPLAY=====================================================
     all_players = [first_player, second_player]
     occupied_spaces = []
-    x_choices = []
-    o_choices = []
+    x_player_choices = []
+    o_player_choices = []
     number_turns = 0
+    continue_game = "Yes"
 
-    while number_turns != 9:
+    while number_turns != 9 and continue_game == "Yes":
         for player in all_players:
             choose_number = True
             valid_number = 0
@@ -99,24 +95,27 @@ def play_game():
                 print(board)
                 number_turns += 1
                 if characters[player_index] == "X":
-                    x_choices.append(valid_number)
-                    win_game(x_choices, player)
-                    print(f"X choices: {x_choices}")
+                    x_player_choices.append(valid_number)
+                    game_analysis = win_game(x_player_choices, player)
+                    continue_game = game_analysis
+                    print(f"continue game : {continue_game}")
                 if characters[player_index] == "O":
-                    o_choices.append(valid_number)
-                    print(f"O choices: {o_choices}")
-                    win_game(o_choices, player)
+                    o_player_choices.append(valid_number)
+                    game_analysis = win_game(o_player_choices, player)
+                    continue_game = game_analysis
+                    print(f"continue game : {continue_game}")
                 if number_turns == 9:
+                    print("It's a draw!!")
                     break
             else:
                 raise ValueError("Error!!! That space is taken. Ending game")
 
-    print("Game over!!")
+            if continue_game == "No":
+                break
+
+        # print("It's a draw")
 
     return
-
-
-# TODO: Fix duplicate selection issue
 
 
 play_game()
