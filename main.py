@@ -24,16 +24,15 @@ def win_game(player_list, player):
     winning_combos = [[1, 2, 3], [1, 4, 7], [1, 5, 9], [2, 5, 8], [3, 6, 9], [3, 5, 7], [4, 5, 6], [7, 8, 9]]
     amended_player_list = player_list + [97, 98, 99, 100, 101, 102, 103]  # Hardcode list to make player list > 3
     sorted_player_list = sorted(amended_player_list)
-    print(f"{player}: {sorted_player_list}")
     game_continue = "Yes"
     if sorted_player_list[:3] in winning_combos:
-        print(f"{player} wins!!")
+        print(f"{player}, you win!!")
         game_continue = "No"
     if sorted_player_list[1:4] in winning_combos:
-        print(f"{player} wins!!")
+        print(f"{player}, you win!!")
         game_continue = "No"
     if sorted_player_list[2:5] in winning_combos:
-        print(f"{player} wins!!")
+        print(f"{player}, you win!!")
         game_continue = "No"
     return game_continue
 
@@ -42,7 +41,18 @@ def play_game():
     """Board used to play the game. Numbers correspond to the spaces"""
     board = "    |     |    \n  1 |  2  |  3 \n----|-----|----\n  4 |  5  |  6 \n    |     |    \n" \
             "----|-----|----\n  7 |  8  |  9 \n    |     |    "
-    print(board)
+
+    print("********************************************")
+    print("*                                          *")
+    print("*      WELCOME TO TIC-TAC-TOE              *")
+    print("*                                          *")
+    print("********************************************")
+
+    print("To play choose your character 'X' or 'O' and type the number in the square"
+          " where \nyou want to place your character ")
+
+
+    # print(board)
 
     # ========================CREATE PLAYERS====================================#
     # Call create_players() to assign players with 'X' or 'O'; use the returned values to create the list "characters"
@@ -57,8 +67,10 @@ def play_game():
     first_player = input("Player 1, what's your name?\n")
     second_player = input("Player 2, what's your name?\n")
 
-    print(f"{first_player}: {player1}")
-    print(f"{second_player}: {player2}")
+    print(f"{first_player}, you are {player1}")
+    print(f"{second_player}, you are {player2}")
+
+    print(board)
     
     # =========================GAMEPLAY=====================================================
     all_players = [first_player, second_player]
@@ -76,7 +88,7 @@ def play_game():
             # Validate player choice
             while choose_number:
                 try:
-                    player_choice = int(input(f"{player}, make a choice:\n"))
+                    player_choice = int(input(f"{player}, type the number of the space you want to play:\n"))
                 except ValueError:
                     print("Error!! Only numbers are allowed")
                 else:
@@ -96,14 +108,10 @@ def play_game():
                 number_turns += 1
                 if characters[player_index] == "X":
                     x_player_choices.append(valid_number)
-                    game_analysis = win_game(x_player_choices, player)
-                    continue_game = game_analysis
-                    print(f"continue game : {continue_game}")
+                    continue_game = win_game(x_player_choices, player)
                 if characters[player_index] == "O":
                     o_player_choices.append(valid_number)
-                    game_analysis = win_game(o_player_choices, player)
-                    continue_game = game_analysis
-                    print(f"continue game : {continue_game}")
+                    continue_game = win_game(o_player_choices, player)
                 if number_turns == 9:
                     print("It's a draw!!")
                     break
@@ -112,8 +120,6 @@ def play_game():
 
             if continue_game == "No":
                 break
-
-        # print("It's a draw")
 
     return
 
