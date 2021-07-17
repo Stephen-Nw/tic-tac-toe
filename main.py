@@ -30,6 +30,19 @@ def create_players():
     return player1, player2
 
 
+# def win_game(player, number):
+#     x_choices = []
+#     o_choices = []
+#     if player == "X":
+#         x_choices.append(number)
+#         print(x_choices)
+#     else:
+#         o_choices.append(number)
+#         print(o_choices)
+
+
+
+
 def play_game():
     """Board used to play the game. Numbers correspond to the spaces"""
     board = "    |     |    \n  1 |  2  |  3 \n----|-----|----\n  4 |  5  |  6 \n    |     |    \n" \
@@ -85,10 +98,8 @@ def play_game():
                 number_turns += 1
                 if number_turns == 9:
                     break
-                print(f"Num turns: {number_turns}")
             else:
-                print("That space is taken; try again")
-                print(board)
+                raise ValueError("Error!!! That space is taken. Ending game")
 
     print("Game over!!")
 
